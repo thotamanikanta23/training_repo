@@ -1,6 +1,6 @@
 name: Sample workflow
 
-on: push
+on: issues
 jobs:
   job1:
     runs-on: ubuntu-latest
