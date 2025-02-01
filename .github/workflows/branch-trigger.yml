@@ -4,8 +4,8 @@ run-name: ${{github.actor}}
 
 on:
   push:
-    branches-ignore:
-      - develop
+    tags:
+      - v1.0
       
 jobs:
   job:
