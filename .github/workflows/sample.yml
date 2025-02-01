@@ -1,6 +1,6 @@
 name: Sample workflow
 run-name: ${{github-actor}}
-on: workflow_dispatch
+on: push
 jobs:
   job1:
     runs-on: ubuntu-latest
