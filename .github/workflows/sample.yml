@@ -2,7 +2,9 @@ name: Sample workflow
 
 run-name: ${{github.actor}}
 
-on: workflow_dispatch
+on: 
+  schedule:
+    - cron: '* * * * *'
 jobs:
   job1:
     runs-on: ubuntu-latest
