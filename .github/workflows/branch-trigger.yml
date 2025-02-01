@@ -4,8 +4,6 @@ run-name: ${{github.actor}}
 
 on:
   push:
-    branches:
-      - master
     branches-ignore:
       - develop
       
