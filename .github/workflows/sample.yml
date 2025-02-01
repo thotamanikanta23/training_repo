@@ -6,10 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "deploy the sameple workflow"
-  job2:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "deploy the sameple workflow"    
+ 
 
 
 
