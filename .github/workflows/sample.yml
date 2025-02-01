@@ -1,13 +1,13 @@
 name: Sample workflow
 run-name: ${{github-actor}}
-on: pull_request
+on: workflow_dispatch
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
       - run: echo "deploy the sameple workflow"
   job2:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - run: echo "deploy the sameple workflow"    
 
