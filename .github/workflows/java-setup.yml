@@ -1,0 +1,19 @@
+name: Java project setup
+
+run-name: ${{github.author}}
+
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  job: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.7.0
+          with:
+            jave-version: 18
+            distribution: 'temrin'
+  
