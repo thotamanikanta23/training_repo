@@ -1,1 +1,16 @@
 name: Sample workflow
+
+on: push
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "deploy the sameple workflow"
+
+
+
+
+
+
+
+
