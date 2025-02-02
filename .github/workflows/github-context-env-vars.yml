@@ -2,7 +2,8 @@ name: Log GitHub Context and set Environment variables
 
 on:
   push:
-  workflow_dispatch:
+    branches:
+      - main
 jobs:
   echo-github-context:
     runs-on: ubuntu-latest
