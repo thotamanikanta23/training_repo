@@ -1,0 +1,15 @@
+name: Log GitHub Context and set Environment variables
+
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  echo-github-context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display details
+        run: |
+          echo "Actor is ${{github.actor}}"
+          echo "Ref is ${{github.ref}}"
+          echo "Event name is ${{github.event_name}}"
+          
