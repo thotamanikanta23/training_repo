@@ -3,15 +3,50 @@ name: environment
 on:
   workflow_dispatch:
     inputs:
-      TARGET_ENVIRONMENT:
-        type: environment
-        default: dev
+      environment:
+        description: 'Select the environment to deploy to'
+        required: true
+        type: choice
+        options:
+          - prod
+          - dev
+
 jobs:
-  echo-env:
+  deploy:
     runs-on: ubuntu-latest
-    environment: ${{inputs.TARGET_ENVIRONMENT}}
+    environment: ${{ github.event.inputs.environment }} 
+
     steps:
-      - run: echo "dev env var is ${{vars.DEV_VAR}}"
-      - run: echo "prod env var is ${{vars.PROD_VAR}}"
-      - run: echo "dev secret is ${{secret.DEV_SECRET}}"
-      - run: echo "prod secret is ${{secret.PROD_SECRET}}"
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Deploy to selected environment
+      run: |
+        if [[ "${{ github.event.inputs.environment }}" == "prod" ]]; then
+          echo "Deploying to prod"
+          # Production deployment commands here
+        elif [[ "${{ github.event.inputs.environment }}" == "dev" ]]; then
+          echo "Deploying to dev"
+          # Staging deployment commands here
+        else
+          echo "Unknown environment"
+          exit 1
+        fi
+
+    - name: Post Deployment Notification
+      run: |
+        if [[ "${{ github.event.inputs.environment }}" == "prod" ]]; then
+          echo "Sending prod notification"
+          
+        else
+          echo "Sending dev notification"
+          
+        fi
