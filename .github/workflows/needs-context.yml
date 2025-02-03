@@ -22,7 +22,7 @@ jobs:
 
       - name: Save build status
         id: build_status
-        run: echo "build_status=$(if [ ${{ steps.tests.outcome }} == 'success' ]; then echo success; else echo failure; fi)" >> $GITHUB_ENV
+        run: echo "build_status=$(if [ $? -eq 0 ]; then echo success; else echo failure; fi)" >> $GITHUB_ENV
 
   deploy:
     needs: build
@@ -36,4 +36,4 @@ jobs:
       - name: Deploy to production
         run: |
           echo "Deploying to production..."
-          # Your deploy command here
+          # Your deploy command here, e.g., `./deploy.sh`
