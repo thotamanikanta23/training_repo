@@ -9,14 +9,12 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         node: [14, 16, 18]
   
-        # Exclude specific combinations
         exclude:
           - os: windows-latest
             node: 14
           - os: macos-latest
             node: 18
   
-        # Include additional specific combinations
         include:
           - os: ubuntu-latest
             node: 20
@@ -27,3 +25,4 @@ jobs:
     steps:
       - name: Print OS and Node.js version
         run: echo "Running on ${{ matrix.os }} with Node.js ${{ matrix.node }}"
+        
