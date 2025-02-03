@@ -1,0 +1,17 @@
+name: environment
+
+on:
+  workflow_dispatch:
+    inputs:
+      TARGET_ENVIRONMENT:
+        type: environment
+        default: dev
+jobs:
+  echo-env:
+    runs-on: ubuntu-latest
+    environment: ${{inputs.TARGET_ENVIRONMENT}}
+    steps:
+      - run: echo "dev env var is ${{vars.DEV_VAR}}"
+      - run: echo "prod env var is ${{vars.PROD_VAR}}"
+      - run: echo "dev secret is ${{secret.DEV_SECRET}}"
+      - run: echo "prod secret is ${{secret.PROD_SECRET}}"
