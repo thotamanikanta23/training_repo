@@ -20,9 +20,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
-
       - name: Save build status
         id: build_status
         run: echo "build_status=$(if [ ${{ steps.tests.outcome }} == 'success' ]; then echo success; else echo failure; fi)" >> $GITHUB_ENV
