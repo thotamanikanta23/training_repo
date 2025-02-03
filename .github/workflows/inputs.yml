@@ -11,7 +11,7 @@ jobs:
   echo-inputs:
     runs-on: ubuntu-latest
     steps: 
-      - run: display the debug output
+      - run: echo "display the debug output"
 
 
   
