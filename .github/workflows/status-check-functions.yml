@@ -28,7 +28,7 @@ jobs:
         id: task-2
         run: |
           echo "Working on the task-2"
-          exit 1  # This will cause Task-2 to fail
+          exit 0 
         
       - name: Check if Task-1 was successful
         if: ${{ steps.task-1.outcome == 'success' }}
