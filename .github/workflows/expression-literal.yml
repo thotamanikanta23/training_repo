@@ -1,4 +1,4 @@
-name: Expression Example
+name: Expression literal
 
 on:
   push:
