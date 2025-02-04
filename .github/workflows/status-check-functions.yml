@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  eco-status-check-functions:
+  echo-status-check-functions:
     runs-on: ubuntu-latest
 
     env:
