@@ -16,6 +16,6 @@ jobs:
         run: |
           echo "triggered by ${{github.event_name}}"
           echo "branch is ${{github.ref}}"
-      - name: '[debug] print when triggered from master'
-        if: ${{inputs.debug && github.ref == 'refs/heads/master'}}
-        run: echo 'I have triggered from master'
+      - name: '[debug] print when triggered from main'
+        if: ${{inputs.debug && github.ref == 'refs/heads/main'}}
+        run: echo 'I have triggered from main'
