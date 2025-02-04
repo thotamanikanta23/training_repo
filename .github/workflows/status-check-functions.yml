@@ -16,12 +16,12 @@ jobs:
     steps:
       - name: Set up the environment
         run: |
-          echo "Setting up the environment..."
+          echo "Setting up the environment"
         
       - name: Task-1
         run: |
           echo "Working on the task-1"
-          echo "Task 1: Success"
+          echo "Task-1: Success"
           
       - name: Task-2
         run: |
