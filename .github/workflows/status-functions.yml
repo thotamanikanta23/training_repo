@@ -1,0 +1,38 @@
+name: Status functions
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  job1:
+    name: First Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Simulate Success
+        run: echo "This step always succeeds"
+
+  job2:
+    name: Dependent Job
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Success
+        if: success()
+        run: echo "Previous job was successful"
+
+      - name: Check Failure
+        if: failure()
+        run: echo "Previous job failed"
+
+      - name: Check Always
+        if: always()
+        run: echo "This runs regardless of previous job status"
+
+      - name: Check Canceled
+        if: cancelled()
+        run: echo "Previous job was canceled"
