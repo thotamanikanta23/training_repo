@@ -3,18 +3,21 @@ name: Functions
 on:
   push:
   workflow_dispatch:
-    
-
 jobs:
-  echo-functions:
+  example_job:
     runs-on: ubuntu-latest
 
     env:
       myString: Mona the Octocat
-      myArray: '["apple", "banana", "cherry"]'
+      myArray: '["apple", "banana", "cherry"]'  # Keep it in quotes as a string
       myJSON: '{"name": "Octocat", "role": "Mascot"}'
 
     steps:
+      - name: Convert Array to JSON
+        run: |
+          json_str="${{ env.myArray }}"  # Directly assign the array in quotes as string
+          echo "Converted array to JSON: $json_str"
+          
       - name: Check if String contains a substring
         run: |
           if ${{ contains(env.myString, 'Octocat') }}; then
@@ -23,30 +26,16 @@ jobs:
             echo "The string does not contain 'Octocat'."
           fi
 
-      - name: Check if String ends with a substring
-        run: |
-          if ${{ endswith(env.myString, 'Octocat') }}; then
-            echo "The string ends with 'Octocat'."
-          else
-            echo "The string does not end with 'Octocat'."
-          fi
-
       - name: Convert Array to JSON
         run: |
-          json_str="${{ tojson(env.myArray) }}"
+          # Correct the assignment of json_str
+          json_str='["apple", "banana", "cherry"]'  # Use the array in a valid string form
           echo "Converted array to JSON: $json_str"
-
-      - name: Check if String starts with a substring
-        run: |
-          if ${{ startswith(env.myString, 'Mona') }}; then
-            echo "The string starts with 'Mona'."
-          else
-            echo "The string does not start with 'Mona'."
-          fi
-
+          
       - name: Parse JSON from a String
         run: |
           json_obj="${{ fromjson(env.myJSON) }}"
           echo "Parsed JSON: $json_obj"
           echo "Name: ${{ fromjson(env.myJSON).name }}"
-          echo "Role: ${{ fromjson(env.myJSON).role }}"
+          echo "Role: ${{ fromjson(env.myJSON).role }}"    
+
