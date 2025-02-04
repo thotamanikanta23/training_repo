@@ -25,11 +25,6 @@ jobs:
           else
             echo "The string does not contain 'DevOps'."
           fi
-
-      - name: Convert Array to JSON
-        run: |
-          json_str='["Siva", "Manoj", "Kumar"]'
-          echo "Converted array to JSON: $json_str"
           
       - name: Parse JSON from a String
         run: |
