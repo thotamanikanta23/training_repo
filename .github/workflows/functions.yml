@@ -8,34 +8,35 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      myString: Mona the Octocat
-      myArray: '["apple", "banana", "cherry"]'  # Keep it in quotes as a string
-      myJSON: '{"name": "Octocat", "role": "Mascot"}'
+      userString: "Manikanta, DevOps"
+      userArray: '["Siva", "Manoj", "Kumar"]'
+      userJSON: '{"name": "Manikanta", "role": "DevOps", "department": "Tech", "location": "HCLTech"}'
 
     steps:
       - name: Convert Array to JSON
         run: |
-          json_str="${{ env.myArray }}"  # Directly assign the array in quotes as string
+          json_str="${{ env.userArray }}" 
           echo "Converted array to JSON: $json_str"
           
       - name: Check if String contains a substring
         run: |
-          if ${{ contains(env.myString, 'Octocat') }}; then
-            echo "The string contains 'Octocat'."
+          if ${{ contains(env.userString, 'DevOps') }}; then
+            echo "The string contains 'DevOps'."
           else
-            echo "The string does not contain 'Octocat'."
+            echo "The string does not contain 'DevOps'."
           fi
 
       - name: Convert Array to JSON
         run: |
-          # Correct the assignment of json_str
-          json_str='["apple", "banana", "cherry"]'  # Use the array in a valid string form
+          json_str='["Siva", "Manoj", "Kumar"]'
           echo "Converted array to JSON: $json_str"
           
       - name: Parse JSON from a String
         run: |
-          json_obj="${{ fromjson(env.myJSON) }}"
+          json_obj="${{ fromjson(env.userJSON) }}"
           echo "Parsed JSON: $json_obj"
-          echo "Name: ${{ fromjson(env.myJSON).name }}"
-          echo "Role: ${{ fromjson(env.myJSON).role }}"    
-
+          echo "Name: ${{ fromjson(env.userJSON).name }}"
+          echo "Role: ${{ fromjson(env.userJSON).role }}"
+          echo "Department: ${{ fromjson(env.userJSON).department }}"
+          echo "Location: ${{ fromjson(env.userJSON).location }}"
+          
