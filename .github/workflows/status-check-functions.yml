@@ -2,7 +2,7 @@ name: Status Check Functions
 
 on:
   push:
-  workflow_dipatch: 
+  workflow_dispatch: 
 
 jobs:
   eco-status-check-functions:
