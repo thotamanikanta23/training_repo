@@ -2,7 +2,7 @@ name: manual approva deploy
 on:
   push:
     branches:
-      - Develop
+      - main
 jobs:
   test:
     runs-on: ubuntu-latest
