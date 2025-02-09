@@ -30,26 +30,4 @@ jobs:
       - name: Run tests
         run: npm test
 
-  pr-notify:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify about PR creation or update
-        run: |
-          if [ "${{ github.event.action }}" == "opened" ]; then
-            echo "New pull request opened!"
-          elif [ "${{ github.event.action }}" == "synchronize" ]; then
-            echo "Pull request synchronized!"
-          fi
 
-  issue-notify:
-    if: github.event_name == 'issues'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify about issue status
-        run: |
-          if [ "${{ github.event.action }}" == "opened" ]; then
-            echo "New issue opened!"
-          elif [ "${{ github.event.action }}" == "closed" ]; then
-            echo "Issue closed!"
-          fi
