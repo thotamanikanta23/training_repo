@@ -34,10 +34,5 @@ jobs:
       - name: Deploy to production
         run: echo "Deploying to production environment!"
         
-  notify:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify team about PR
-        run: echo "Notify team about the pull request!"
+
 
