@@ -3,14 +3,16 @@ name: branch & Patch Pipeline
 on:
   push:
     branches:
-      - '**/feature/*'        # Matches any branch starting with 'feature/'
-      - '+*main'            # Explicitly includes any 'main' branch
-      - '+*develop'            # Explicitly includes any 'develop' branch
+      - main
+ #     - '**/feature/*'        # Matches any branch starting with 'feature/'
+ #     - '+*main'            # Explicitly includes any 'main' branch
+ #     - '+*develop'            # Explicitly includes any 'develop' branch
   pull_request:
     branches:
-      - '**/feature/*'        # Matches any PR with a 'feature/' branch
-      - '+*main'            # Matches PRs with 'main' branch
-      - '+*develop'            # Matches PRs with 'develop' branch
+      - main
+  #    - '**/feature/*'        # Matches any PR with a 'feature/' branch
+ #     - '+*main'            # Matches PRs with 'main' branch
+  #    - '+*develop'            # Matches PRs with 'develop' branch
 
 jobs:
   patch_files:
