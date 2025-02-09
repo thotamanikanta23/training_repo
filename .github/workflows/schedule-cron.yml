@@ -2,7 +2,8 @@ name: schedule cron Workflow
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs every day at midnight UTC
+    - cron: '* * * * *'
+   # - cron: '0 0 * * *'  # Runs every day at midnight UTC
 
 jobs:
   build:
