@@ -1,0 +1,20 @@
+name: Sample workflow
+
+run-name: ${{github.actor}}
+
+on: workflow_dispatch
+  
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "deploy the sameple workflow"
+ 
+
+
+
+
+
+
+
+

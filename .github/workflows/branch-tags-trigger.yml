@@ -1,0 +1,16 @@
+name: Trigger for branch
+
+run-name: ${{github.actor}}
+
+on:
+  push:
+    tags:
+      - v1.0
+      
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "trigger the workflow for the branch"
+    
+      

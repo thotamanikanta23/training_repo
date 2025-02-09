@@ -1,0 +1,60 @@
+name: Expression literal
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  echo-expression-literal:
+    runs-on: ubuntu-latest
+    env:
+      myNull: ${{ null }}
+      myBoolean: ${{ false }}
+      myIntegerNumber: ${{ 711 }}
+      myFloatNumber: ${{ -9.2 }}
+      myHexNumber: ${{ 0xff }}
+      myExponentialNumber: ${{ -2.99e-2 }}
+      myString: Manikanta
+      myStringInBraces: ${{ 'working''with expressions' }}
+
+    steps:
+      - name: Display env variables
+        run: |
+          echo "myNull is: ${{ env.myNull }}"
+          echo "myBoolean is: ${{ env.myBoolean }}"
+          echo "myIntegerNumber is: ${{ env.myIntegerNumber }}"
+          echo "myFloatNumber is: ${{ env.myFloatNumber }}"
+          echo "myHexNumber is: ${{ env.myHexNumber }}"
+          echo "myExponentialNumber is: ${{ env.myExponentialNumber }}"
+          echo "myString is: ${{ env.myString }}"
+          echo "myStringInBraces is: ${{ env.myStringInBraces }}"
+
+      - name: Boolean Expression
+        run: |
+          if [ "${{ env.myBoolean }}" == "false" ]; then
+            echo "Boolean value is false"
+          else
+            echo "Boolean value is true"
+          fi
+
+      - name: Perform Arithmetic Operations
+        run: |
+          sum=$(( {{ env.myIntegerNumber }} + 100 ))
+          mul=$(echo "${{ env.myFloatNumber }} * 2" | bc)
+          echo "Sum is: $sum"
+          echo "Product is: $mul"
+
+      - name: Handle Null Value
+        run: |
+          if [ -z "${{ env.myNull }}" ]; then
+            echo "Null value detected"
+          else
+            echo "Null value is: ${{ env.myNull }}"
+          fi
+
+      - name: Exponential and Hex Number Operations
+        run: |
+          exp_num="${{ env.myExponentialNumber }}"
+          hex_num=$(( {{ env.myHexNumber }} + 10 ))
+          echo "Exponential Number: $exp_num"
+          echo "Hexadecimal Number (with addition): $hex_num"

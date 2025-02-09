@@ -1,0 +1,57 @@
+name: Status Check Functions
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  echo-status-check-functions:
+    runs-on: ubuntu-latest
+
+    env:
+      userString: "Manikanta, DevOps"
+      projectStatus: "In Progress"
+      userJSON: '{"name": "Manikanta", "role": "DevOps", "department": "Tech", "location": "HCLTech"}'
+
+    steps:
+      - name: Set up the environment
+        run: |
+          echo "Setting up the environment"
+        
+      - name: Task-1
+        id: task-1
+        run: |
+          echo "Working on the task-1"
+          echo "Task-1: Success"
+        
+      - name: Task-2
+        id: task-2
+        run: |
+          echo "Working on the task-2"
+          exit 0 
+        
+      - name: Check if Task-1 was successful
+        if: ${{ steps.task-1.outcome == 'success' }}
+        run: |
+          echo "Task-1 was successful."
+        
+      - name: Check if Task-2 was successful
+        if: ${{ steps.task-2.outcome == 'failure' }}
+        run: |
+          echo "Task-2 failed as expected."
+        
+      - name: Always run this step
+        run: |
+          echo "This step always runs in case of success or failure."
+        
+      - name: Check workflow canceled
+        run: |
+          if ${{ canceled() }}; then
+            echo "The workflow was canceled."
+          else
+            echo "The workflow was not canceled."
+        
+      - name: Final Status
+        run: |
+          echo "Final status: ${{ env.projectStatus }}"
+          echo "output is: ${{ fromjson(env.userJSON).name }} - Role: ${{ fromjson(env.userJSON).role }}"

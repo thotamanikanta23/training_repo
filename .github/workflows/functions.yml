@@ -1,0 +1,37 @@
+name: Functions
+
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+
+    env:
+      userString: "Manikanta, DevOps"
+      userArray: '["Siva", "Manoj", "Kumar"]'
+      userJSON: '{"name": "Manikanta", "role": "DevOps", "department": "Tech", "location": "HCLTech"}'
+
+    steps:
+      - name: Convert Array to JSON
+        run: |
+          json_str="${{ env.userArray }}" 
+          echo "Converted array to JSON: $json_str"
+          
+      - name: Check if String contains a substring
+        run: |
+          if ${{ contains(env.userString, 'DevOps') }}; then
+            echo "The string contains 'DevOps'."
+          else
+            echo "The string does not contain 'DevOps'."
+          fi
+          
+      - name: Parse JSON from a String
+        run: |
+          json_obj="${{ fromjson(env.userJSON) }}"
+          echo "Parsed JSON: $json_obj"
+          echo "Name: ${{ fromjson(env.userJSON).name }}"
+          echo "Role: ${{ fromjson(env.userJSON).role }}"
+          echo "Department: ${{ fromjson(env.userJSON).department }}"
+          echo "Location: ${{ fromjson(env.userJSON).location }}"
+          
