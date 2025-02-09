@@ -1,9 +1,7 @@
 name: main reusable Workflow_call
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   trigger-reusable-workflow:
