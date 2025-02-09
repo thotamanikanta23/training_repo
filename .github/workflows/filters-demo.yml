@@ -44,4 +44,4 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deploy to production
-        run: npm run deploy  # Replace with your actual deployment command
+        run: npm run build  
