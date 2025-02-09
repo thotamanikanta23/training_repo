@@ -1,0 +1,55 @@
+name: Activity Types
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  issues:
+    types:
+      - opened
+      - closed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+  pr-notify:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify about PR creation or update
+        run: |
+          if [ "${{ github.event.action }}" == "opened" ]; then
+            echo "New pull request opened!"
+          elif [ "${{ github.event.action }}" == "synchronize" ]; then
+            echo "Pull request synchronized!"
+          fi
+
+  issue-notify:
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify about issue status
+        run: |
+          if [ "${{ github.event.action }}" == "opened" ]; then
+            echo "New issue opened!"
+          elif [ "${{ github.event.action }}" == "closed" ]; then
+            echo "Issue closed!"
+          fi
