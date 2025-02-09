@@ -30,7 +30,7 @@ jobs:
           # Deploy to production logic here
         else
           echo "Deploying to staging environment"
-          # Deploy to staging logic here
+          # Deploy to staging logic here.
         fi
 
     - name: Post Deployment Notification
