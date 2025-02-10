@@ -1,0 +1,44 @@
+name: environment deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: 
+      name: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Deploy to ${{ github.event.repository.name }}
+      run: |
+        if [[ "${{ github.environment }}" == "production" ]]; then
+          echo "Deploying to production environment"
+          # Deploy to production logic here
+        else
+          echo "Deploying to staging environment"
+          # Deploy to staging logic here.
+        fi
+
+    - name: Post Deployment Notification
+      run: |
+        if [[ "${{ github.environment }}" == "production" ]]; then
+          echo "Sending production notification"
+          # Production-specific notification logic
+        else
+          echo "Sending staging notification"
+          # Staging-specific notification logic
+        fi

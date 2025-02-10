@@ -1,0 +1,27 @@
+name: reusable
+
+on:
+  workflow_call:
+    inputs:
+      test_suite:
+        description: 'this is my reusable workflow'
+        required: true
+        type: string
+
+jobs:
+  run-reusable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run reusable
+        run: npm run reusable:${{ inputs.test_suite }}

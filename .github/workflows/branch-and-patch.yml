@@ -1,0 +1,48 @@
+name: branch & Patch Pipeline
+
+on:
+  push:
+    branches:
+      - main
+ #     - '**/feature/*'        # Matches any branch starting with 'feature/'
+ #     - '+*main'            # Explicitly includes any 'main' branch
+ #     - '+*develop'            # Explicitly includes any 'develop' branch
+  pull_request:
+    branches:
+      - main
+  #    - '**/feature/*'        # Matches any PR with a 'feature/' branch
+ #     - '+*main'            # Matches PRs with 'main' branch
+  #    - '+*develop'            # Matches PRs with 'develop' branch
+
+jobs:
+  patch_files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Apply Patch
+        run: |
+          # Applying the patch to JavaScript and TypeScript files
+          # Includes all JS and TS files (even nested ones)
+          git diff --cached -- '**/*.js' '**/*.ts' 
+
+      - name: Ignore Test Files
+        run: |
+          # Applying patch while ignoring test files
+          git diff --cached -- '!*test*.js' '!*.spec.ts'
+
+      - name: Run Tests
+        run: |
+          # Run unit tests, excluding test files from patch
+          npm test
+          
+  # A separate job to deploy (only when on main)
+  deploy:
+    needs: patch_files
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Application
+        run: |
+          echo "Deploying to production..."

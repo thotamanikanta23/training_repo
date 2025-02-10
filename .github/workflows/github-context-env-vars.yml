@@ -1,0 +1,25 @@
+name: Log GitHub Context and set Environment variables
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+jobs:
+  echo-github-context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display details
+        run: |
+          echo "Actor is ${{github.actor}}"
+          echo "Ref is ${{github.ref}}"
+          echo "Event name is ${{github.event_name}}"
+      - name: Set environment variable GIT_BRANCH
+        run: |
+          BRANCH_NAME=$(echo "${GITHUB_REF#refs/heads/}")
+          echo "GIT_BRANCH=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Display GIT_BRANCH
+        run: |
+          echo "GIT_BRANCH is $GIT_BRANCH"
+          

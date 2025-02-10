@@ -1,0 +1,33 @@
+name: Needs CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.build.outputs.version }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Build application
+        id: build
+        run: |
+          echo "Building app..."
+          echo "::set-output name=version::$(git rev-parse --short HEAD)"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy with version
+        run: |
+          echo "Deploying version ${{ needs.build.outputs.version }} to production..."
+          # Deploy commands here

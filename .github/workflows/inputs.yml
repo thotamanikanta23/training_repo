@@ -1,0 +1,17 @@
+name: inputs
+
+run-name: Inputs | DEBUG - ${{inputs.debug}}
+on:
+  workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        default: false
+jobs: 
+  echo-inputs:
+    runs-on: ubuntu-latest
+    steps: 
+      - run: echo "display the debug output"
+
+
+  

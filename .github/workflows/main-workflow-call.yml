@@ -1,0 +1,16 @@
+name: main reusable Workflow_call
+
+on:
+  workflow_dispatch:
+
+jobs:
+  trigger-reusable-workflow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger from Workflow_call with Secrets
+        uses: ./.github/workflows/workflow-call.yml
+        with:
+          param1: value1
+          param2: value2
+

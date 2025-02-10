@@ -1,0 +1,30 @@
+name: expression
+
+on: 
+  push:
+  workflow_dispatch:
+    inputs: 
+      debug: 
+        type: boolean
+        default: false
+jobs: 
+  echo-expression:
+    runs-on: ubuntu-latest
+    steps:
+      - name: '[debug] print startup info'
+        if: ${{inputs.debug}}
+        run: |
+          echo "triggered by ${{github.event_name}}"
+          echo "branch is ${{github.ref}}"
+      - name: '[debug] print when triggered from main'
+        if: ${{inputs.debug && github.ref == 'refs/heads/main'}}
+        run: echo 'I have triggered from main'
+      - name: '[debug] print when triggered from thotamanikanta23-expression'
+        if: ${{inputs.debug && github.ref == 'refs/heads/thotamanikanta23-expression'}}
+        run: echo 'I have triggered from thotamanikanta23-expression'
+      - name: '[debug] print when triggered from main'
+        if: ${{inputs.debug || github.ref == 'refs/heads/main'}}
+        run: echo 'I have triggered from main'
+      - name: '[debug] print when triggered from thotamanikanta23-expression'
+        if: ${{inputs.debug || github.ref == 'refs/heads/thotamanikanta23-expression'}}
+        run: echo 'I have triggered from thotamanikanta23-expression'
